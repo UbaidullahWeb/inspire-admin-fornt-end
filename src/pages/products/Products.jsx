@@ -1,4 +1,5 @@
 import React from 'react'
+import Modal from '../../components/modal/Modal';
 
 const Products = () => {
   return (
@@ -61,6 +62,8 @@ const Products = () => {
         </div>
 
       </div>
+
+      <Modal />
 
     </div>
   )
