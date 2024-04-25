@@ -1,7 +1,9 @@
+import ReactRoute from "./reactRoute/ReactRoute";
+
 function App() {
   return (
     <div className="App">
-      <h1>Hello</h1>
+      <ReactRoute />
     </div>
   );
 }
