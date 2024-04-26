@@ -5,6 +5,7 @@ export const inspireApis = createApi({
   reducerPath: 'inspireApis',
   baseQuery: fetchBaseQuery({ baseUrl: Config.serverApiUrl, }),
   endpoints: (builder) => ({
+  
   getProducts: builder.query({
     query: () => "products?populate=*", 
   }),
