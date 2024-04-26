@@ -10,7 +10,9 @@ const Modal = () => {
                     Edit Product
                 </span>
 
-                
+                <span className='text-[#303031] text-[24px] cursor-pointer'>
+                    X
+                </span>
 
             </div>
 
@@ -18,4 +20,4 @@ const Modal = () => {
     )
 }
 
-export default Modal
+export default Modal;
