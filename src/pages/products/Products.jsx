@@ -94,7 +94,7 @@ const Products = () => {
           );
         })}
       </div>
-      {/* <Modal /> */}
+      <Modal />
     </div>
   );
 };
