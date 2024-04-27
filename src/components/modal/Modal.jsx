@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import {
   useAddProductMutation,
+  useGetSingleProductQuery,
   useUpdateProductMutation,
 } from "../../redux/InspireApis";
 import { enqueueSnackbar } from "notistack";
 
-const Modal = ({ id }) => {
+const Modal = ({ id, onClose }) => {
   const [addProduct, { isLoading: addLoading }] = useAddProductMutation();
   const [updateProduct, { isLoading: updateLoading }] =
-    useUpdateProductMutation();
+  useUpdateProductMutation();
+  const { data: getSingleProduct, } = useGetSingleProductQuery(id)
   const [formData, setFormData] = useState({
     name: "",
     price: "",
@@ -16,7 +18,6 @@ const Modal = ({ id }) => {
     discount: "",
     flavorType: "",
   });
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -66,19 +67,21 @@ const Modal = ({ id }) => {
     if (handleValidation()) {
       return true;
     }
-    const formattedData = {
+    const data = {
+      "data": {
         name: formData.name,
         price: Number(formData.price),
-        detail: formData.detail,
-        discount : Number(formData.discount),
+        detail: formData.description,
+        discount: Number(formData.discount),
         flavor: formData.flavorType
+      }
     };
     try {
       if (id) {
-        await updateProduct({ id: id, formattedData });
+        await updateProduct({ id: id, data });
         enqueueSnackbar("Product updated successfully", { variant: "success" });
       } else {
-        await addProduct(formattedData);
+        await addProduct(data);
         enqueueSnackbar("Product added successfully", { variant: "success" });
       }
       setFormData({
@@ -95,14 +98,25 @@ const Modal = ({ id }) => {
       });
     }
   };
-
+  console.log("getSingleProduct data:", getSingleProduct);
+  useEffect(() => {
+    if (id) {
+      setFormData({
+        name: getSingleProduct?.data?.attributes?.name,
+        price: getSingleProduct?.data?.attributes?.price,
+        description: getSingleProduct?.data?.attributes?.detail,
+        discount: getSingleProduct?.data?.attributes?.discount,
+        flavorType: getSingleProduct?.data?.attributes?.flavor
+      })
+    }
+  }, [getSingleProduct])
   return (
-    <div className="fixed flex p-[20px] bg-[#FFF] w-[800px] shadow-[0_4px_20px_1000px_rgba(0,0,0,0.6)] rounded-[10px] flex-col gap-[24px] top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]">
+    <div className="fixed flex p-[20px] bg-[#FFF] w-[800px] h-[700px] shadow-[0_4px_20px_1000px_rgba(0,0,0,0.6)] rounded-[10px] flex-col gap-[24px] top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]">
       <div className="flex items-center justify-between">
         <span className="text-[#303031] font-[500] text-[28px]">
           Edit Product
         </span>
-        <span className="text-[#303031] text-[24px] cursor-pointer">X</span>
+        <span onClick={onClose} className="text-[#303031] text-[24px] cursor-pointer">X</span>
       </div>
       <input
         type="text"
