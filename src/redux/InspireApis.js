@@ -37,4 +37,6 @@ export const {
   useGetProductsQuery,
   useGetSingleProductQuery,
   useAddProductMutation,
+  useUpdateProductMutation,
+  useDeleteProductMutation,
 } = inspireApis;
