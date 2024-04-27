@@ -4,12 +4,14 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const inspireApis = createApi({
   reducerPath: "inspireApis",
   baseQuery: fetchBaseQuery({ baseUrl: Config.serverApiUrl }),
+  tagTypes: ['getProducts', 'Orders'],
   endpoints: (builder) => ({
     getProducts: builder.query({
       query: () => "products?populate=*",
     }),
     getSingleProduct: builder.query({
       query: (id) => `products/${id}`,
+      providesTags: ['getProducts'],
     }),
     addProduct: builder.mutation({
       query: (data) => ({
@@ -17,6 +19,7 @@ export const inspireApis = createApi({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ['getProducts'],
     }),
     updateProduct: builder.mutation({
       query: ({ id, data }) => ({
@@ -24,12 +27,14 @@ export const inspireApis = createApi({
         method: "PUT",
         body: data,
       }),
+      invalidatesTags: ['getProducts'],
     }),
     deleteProduct: builder.mutation({
       query: (id) => ({
         url: `products/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ['getProducts'],
     }),
   }),
 });
