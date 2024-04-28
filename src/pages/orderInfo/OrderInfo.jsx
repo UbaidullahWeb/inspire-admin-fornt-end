@@ -41,7 +41,7 @@ const OrderInfo = () => {
                     console.log(order, "order")
                     const { email, phoneNumber, totalPrice, userName, address } = order?.attributes
                     return (
-                        <div className="flex items-center px-[24px] py-[16px] bg-[#FFF] rounded-[8px] shadow-[0_4px_20px_-0px_rgba(0,0,0,0.05)]">
+                        <div onClick={() => handleModel(order.id)} className="flex items-center px-[24px] py-[16px] bg-[#FFF] rounded-[8px] shadow-[0_4px_20px_-0px_rgba(0,0,0,0.05)]">
                             <span className='text-[#303031] font-[500] w-full'>
                                 02/07/2022
                             </span>
@@ -60,7 +60,7 @@ const OrderInfo = () => {
                             <span className='text-[#303031] font-[500] w-full'>
                                 {address}
                             </span>
-                            <i onClick={() => handleModel(order.id)} className="ri-eye-line text-[24px] cursor-pointer"></i>
+                            <i className="ri-eye-line text-[24px] cursor-pointer"></i>
                         </div>
                     )
                 })

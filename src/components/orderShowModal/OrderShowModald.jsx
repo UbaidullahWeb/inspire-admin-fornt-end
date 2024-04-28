@@ -76,6 +76,14 @@ function OrderShowModald({ onClose, id }) {
                         <div className="grid grid-cols-2 gap-[32px]">
                             <div className="flex flex-col gap-[12px]">
                                 <span className='text-[#303031] font-[500] w-full'>
+                                    Image
+                                </span>
+                                <span className='text-[#737791] font-[500] w-full'>
+                                    <img className='w-auto h-[100px]' src={image || "https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg"} alt={image} />
+                                </span>
+                            </div>
+                            <div className="flex flex-col gap-[12px]">
+                                <span className='text-[#303031] font-[500] w-full'>
                                     Name
                                 </span>
                                 <span className='text-[#737791] font-[500] w-full'>
