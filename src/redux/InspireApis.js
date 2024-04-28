@@ -8,10 +8,10 @@ export const inspireApis = createApi({
   endpoints: (builder) => ({
     getProducts: builder.query({
       query: () => "products?populate=*",
+      providesTags: ['getProducts'],
     }),
     getSingleProduct: builder.query({
       query: (id) => `products/${id}?populate=*`,
-      providesTags: ['getProducts'],
     }),
     addProduct: builder.mutation({
       query: (data) => ({

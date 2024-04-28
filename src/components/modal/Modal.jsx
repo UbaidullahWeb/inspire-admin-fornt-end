@@ -80,7 +80,7 @@ const Modal = ({ id, onClose }) => {
         await updateProduct({ id, data: data });
         enqueueSnackbar("Product updated successfully", { variant: "success" });
       } else {
-        await addProduct(data);
+        await addProduct({ data: data });
         enqueueSnackbar("Product added successfully", { variant: "success" });
       }
 

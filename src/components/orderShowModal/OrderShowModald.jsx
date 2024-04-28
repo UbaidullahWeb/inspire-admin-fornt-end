@@ -1,8 +1,8 @@
 import React from 'react'
 import { useGetSingleOrderQuery } from '../../redux/InspireApis'
 function OrderShowModald({ onClose, id }) {
-    const { data: getSingleOrder } = useGetSingleOrderQuery(id)
-    const { email, phoneNumber, totalPrice, userName, address, products } = getSingleOrder?.data?.attributes
+    const { data: getSingleOrder, isLoading } = useGetSingleOrderQuery(id)
+    const { email, phoneNumber, totalPrice, userName, address, products } = getSingleOrder?.data?.attributes || {}
     const productsData = products?.products
     console.log(getSingleOrder?.data?.attributes, "getSingleOrder?.attributes")
     return (
@@ -63,7 +63,7 @@ function OrderShowModald({ onClose, id }) {
                     </span>
                 </div>
             </div>
-            {productsData.map((product) => {
+            {isLoading? <div>Loading...</div> :productsData?.map((product) => {
                 const { id, name, price, image, qty, discount, flavor } = product
                 console.log(product, "product")
                 return (

@@ -38,8 +38,7 @@ const OrderInfo = () => {
                     <span className='w-[94px]'></span>
                 </div>
                 {orders?.data.map((order) => {
-                    console.log(order, "order")
-                    const { email, phoneNumber, totalPrice, userName, address } = order?.attributes
+                    const { email, phoneNumber, totalPrice, userName, address } = order?.attributes || {};
                     return (
                         <div onClick={() => handleModel(order.id)} className="flex items-center px-[24px] py-[16px] bg-[#FFF] rounded-[8px] shadow-[0_4px_20px_-0px_rgba(0,0,0,0.05)]">
                             <span className='text-[#303031] font-[500] w-full'>
@@ -66,7 +65,7 @@ const OrderInfo = () => {
                 })
                 }
             </div>
-            {orderModel && <OrderShowModald id={selectedOrder} onClose={() => setOrderModel(false)} id={selectedOrder} />}
+            {orderModel && <OrderShowModald id={selectedOrder} onClose={() => setOrderModel(false)} />}
         </div>
     )
 }
