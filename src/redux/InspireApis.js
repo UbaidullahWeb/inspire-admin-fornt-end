@@ -10,7 +10,7 @@ export const inspireApis = createApi({
       query: () => "products?populate=*",
     }),
     getSingleProduct: builder.query({
-      query: (id) => `products/${id}`,
+      query: (id) => `products/${id}?populate=*`,
       providesTags: ['getProducts'],
     }),
     addProduct: builder.mutation({
@@ -36,6 +36,12 @@ export const inspireApis = createApi({
       }),
       invalidatesTags: ['getProducts'],
     }),
+    getOrders: builder.query({
+      query: ()=> "orders"
+    }),
+    getSingleOrder: builder.query({
+      query: (id) => `orders/${id}`,
+    })
   }),
 });
 export const {
@@ -44,4 +50,6 @@ export const {
   useAddProductMutation,
   useUpdateProductMutation,
   useDeleteProductMutation,
+  useGetOrdersQuery,
+  useGetSingleOrderQuery
 } = inspireApis;

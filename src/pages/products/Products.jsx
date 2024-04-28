@@ -50,7 +50,7 @@ const Products = () => {
               <div className="w-full flex items-center justify-center">
                 <img
                   className="max-h-[360px] max-w-[240px] object-cover"
-                  src={image || "images/product.png"}
+                  src={image || "https://www.gasso.com/wp-content/uploads/2017/04/noimage.jpg"}
                   alt=""
                 />
               </div>
